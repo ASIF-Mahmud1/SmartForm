@@ -9,6 +9,23 @@ strength: {css: '', js: '', html: ''} ,
 currentQuestion : '#welcome'
 };
 
+if(localStorage.getItem('userData'))
+{
+  userData= JSON.parse(localStorage.getItem('userData'));
+
+  $('#welcome').hide();
+  $(userData.currentQuestion).show();
+  $('#name').val(userData.name);
+  $('#email').val(userData.email);
+  //console.log(localStorage.getItem('userData').name);
+}
+
+else
+{
+  localStorage.setItem('userData', JSON.stringify(userData));
+//  console.log(localStorage);
+}
+
 
 
 $('#start').click(function()
@@ -16,6 +33,9 @@ $('#start').click(function()
 //  console.log("start");
   $('#welcome').hide();
   $('#q1').show();
+
+  userData.currentQuestion= "#q1";
+  localStorage.setItem('userData' , JSON.stringify(userData));
 });
 
 $('name').change(function(event)
@@ -28,11 +48,18 @@ $('#next').click(function()
 {
   if($('#name').val() && $('#email').val())
   {
-  userData.name= $('name').val();
-  userData.email= $('email').val();
+  userData.name= $('#name').val();
+  userData.email= $('#email').val();
   $('#welcome').hide();
   $('#q1').hide();
   $('#q2').show();
+
+
+  userData.currentQuestion="#q2";
+  localStorage.setItem('userData', JSON.stringify(userData));
+
+  //console.log($('#name').val());
+  //console.log($('#email').val());
 }
 
 else
@@ -46,6 +73,7 @@ $('#html').click(function()
   //$('#welcome').show();
   $('#q2').hide();
   $('#q2a').show();
+  
 }
 );
 
