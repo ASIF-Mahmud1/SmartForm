@@ -9,6 +9,22 @@ strength: {css: '', js: '', html: ''} ,
 currentQuestion : '#welcome'
 };
 
+function catchClassLikeFish(classname, arrary, name )
+{
+  var a= document.getElementsByClassName(classname);
+  var length= document.getElementsByClassName(classname).length;
+
+  var counter=0;
+  for(var i=0;i<length;i++)
+  {
+    if(a[i].firstElementChild.firstElementChild.checked==true)
+    {
+      alert(a[i].innerText);
+      arrary[name][counter]= a[i].firstElementChild.textContent; counter++;
+    }
+  }
+}
+
 if(localStorage.getItem('userData'))
 {
   userData= JSON.parse(localStorage.getItem('userData'));
@@ -73,7 +89,7 @@ $('#html').click(function()
   //$('#welcome').show();
   $('#q2').hide();
   $('#q2a').show();
-  
+
 }
 );
 
@@ -146,6 +162,12 @@ $("#next1").click(function()
   //$('#q2b').hide();
 //  $('#q2c').hide();
   $('#q3').show();
+  var temp="likes";
+
+  catchClassLikeFish("loveOfHTML" , userData.html,temp);
+//  catchClassLikeFish("hateOfHTML");
+
+
 }
 );
 
@@ -178,3 +200,13 @@ $("#next4").click(function()
   $('#thanks').show();
 }
 );
+
+//var s= document.getElementsByName('likesHTML');
+//alert(s.length);
+//for(var i=0;i<s.length;i++)
+//{
+  //if(s[i].checked==true)
+//  {
+  //  console.log("Mofo You Clicked Me");
+//  }
+//}
